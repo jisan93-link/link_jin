@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>링크 포털</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 50px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s ease;
+		}
+		     
+        .row {
+            display: flex; /* Flexbox 사용 */
+            flex-wrap: wrap; /* 다음 줄로 넘어가도록 설정 */
+            justify-content: center; /* 중앙 정렬 */
+            width: 100%;
+        }
+        
+	    .tile {
+            position: relative;
+            text-align: center;
+            width: 100px; 
+            height: 100px;
+            padding: 10px;
+            display: flex;
+            justify-content: center; /* 중앙 정렬 */
+			align-items: center; /* 중앙 정렬 */
+			background-color: rgb(200, 200, 200); /* 원 색상 */
+            border-radius: 50%; /* 원형으로 만들기 */
+            margin: 0 10px;
+	    }
+
+        .tile img {
+            width: 72px;
+            height: 72px;
+            border-radius: 10%;     
+            background-color: rgb(256, 256, 256);
+        }
+               
+	.date {
+    	    position: absolute; /* 날짜를 절대 위치로 설정 */
+            top: 46%; /* 세로 중앙 */
+	    left: 50%; /* 가로 중앙 */
+    	    transform: translate(-50%, -50%); /* 중앙 정렬 */
+            color: #1E88E5; /* 날짜 색상 설정 */
+	    font-size: 180%; /* 날짜 크기 설정 */
+    	    font-weight: bold; /* 글자를 볼드체로 설정 */
+        	z-index: 10; /* 날짜가 이미지 위에 보이도록 설정 */
+	    }
+	    
+	    .tile.empty {
+            background-color: transparent; /* 비어있는 아이콘의 배경색상 없애기 */
+        }
+        
+        .tile:hover::after {
+            content: attr(data-title); /* data-title 속성의 내용을 표시 */
+            position: absolute;
+            bottom: -30px; /* 위치 조정 */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(125, 125, 125, 0.7); /* 배경색상 */
+            color: white; /* 텍스트 색상 */
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 12px; /* 폰트 크기 */
+            white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 */
+            z-index: 1; /* 다른 요소 위에 표시되도록 설정 */
+            visibility: visible; /* 항상 보이도록 설정 */
+            opacity: 1; /* 불투명도 설정 */
+            transition: opacity 0.3s ease; /* 부드러운 전환 효과 */
+        }
+        .tile.empty:hover::after {
+    		content: none; /* 빈 셀에 마우스를 올려도 내용이 나타나지 않도록 설정 */
+		}
+    
+                /* Full HD ػ㵵頠*/
+        @media (max-width: 1920px) {
+            .tile {
+                width: 65px;
+                height: 65px;
+            }
+            .tile img {
+                width: 50px;
+                height: 50px;
+            }
+            .date{
+            	font-size: 140%;
+            }
+            .tile:hover::after {
+            	bottom: -15px; /* 위치 조정 */
+            }	
+        }
+
+        /* 4K ػ㵵頠*/
+        @media (min-width: 2600px) {
+            .tile {
+                width: 140px;
+            }
+            .tile img {
+                width: 112px;
+                height: 112px;
+            }
+            .date{
+            	font-size: 310%;
+            }
+        }
+        
+        
+    </style>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const linksConfig = {
+        '211.57.34.231': {
+            'map-link': 'https://map.kakao.com',
+            'weather-link': 'https://www.weather.go.kr/w/index.do?location=127.050260,35.834339#dong/5211367000/35.83507390600234/127.04950689405304/',
+            'account-link': '',
+            'nara-link': 'https://www.g2b.go.kr/',
+            'dlswl-link': 'https://www.e-revenuestamp.or.kr/index.giro',
+            'nas-link': '',
+            'nasman-link': '',
+            'nasmov-link': ''
+        },
+        'default': {
+            'map-link': 'https://map.naver.com',
+            'weather-link': 'https://www.weather.go.kr/w/image/vshrt/rain.do',
+            'account-link': 'https://docs.google.com/spreadsheets/d/1BQP86KYvWIzgw8xLp365bHlCb8C0uhIxnl32dGPawdw/edit#gid=1889116597',
+            'nara-link': '',
+            'dlswl-link': '',
+            'nas-link': 'https://jisan93.myds.me',
+            'nasman-link': 'https://jisan93.myds.me:45001',
+            'nasmov-link': 'http://jisan93.myds.me:8096'
+        }
+    };
+
+    async function getUserIP() {
+        try {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 5000); // 5초 타임아웃
+            const response = await fetch('https://api.ipify.org?format=json', { signal: controller.signal });
+            clearTimeout(timeout);
+            const data = await response.json();
+            return data.ip || 'default';
+        } catch (error) {
+            console.error('IP 가져오기 실패:', error);
+            return 'default'; // 실패 시 기본 설정 사용
+        }
+    }
+
+    async function setLinks() {
+        const userIP = await getUserIP();
+        const config = linksConfig[userIP] || linksConfig['default'];
+
+        Object.keys(config).forEach(id => {
+            const linkElement = document.getElementById(id);
+            if (linkElement) {
+                linkElement.href = config[id];
+            } else {
+                console.warn(`요소 ID '${id}'를 찾을 수 없습니다.`);
+            }
+        });
+    }
+
+    setLinks();
+});
+    </script>
+</head>
+<body>
+	<script>
+        // 이미지 배열
+        const images = [
+            'https://jisan93-link.github.io/link-home/pic2/samantha-gades-BlIhVfXbi9s-unsplash.jpg',
+            'https://jisan93-link.github.io/link-home/pic2/isaac-benhesed-onLbXleIkds-unsplash.jpg',
+            'https://jisan93-link.github.io/link-home/pic2/ng-creative-B8OFIVE2Ruo-unsplash.jpg',
+            'https://jisan93-link.github.io/link-home/pic2/leone-venter-VieM9BdZKFo-unsplash.jpg',
+            'https://jisan93-link.github.io/link-home/pic2/invictus-tailoring-sneaker-socks-5OZgVj0YVwQ-unsplash.jpg',
+            'https://jisan93-link.github.io/link-home/pic2/pexels-tirachard-kumtanom-112571-733857.jpg',
+            'https://jisan93-link.github.io/link-home/pic2/pexels-pixabay-434337.jpg',
+            'https://jisan93-link.github.io/link-home/pic2/pexels-pixabay-162616.jpg',
+            'https://jisan93-link.github.io/link-home/pic2/pexels-andreea-ch-371539-1166644.jpg',
+            'https://jisan93-link.github.io/link-home/pic2/pexels-goumbik-1420709.jpg',
+            'https://jisan93-link.github.io/link-home/pic2/pexels-goumbik-1420701.jpg'
+        ];
+
+        // 오늘의 날짜를 기준으로 이미지 인덱스를 결정
+        const today = new Date();
+        const index = today.getDate() % images.length;
+
+        // 배경 이미지 설정
+        document.body.style.backgroundImage = `url(${images[index]})`;
+    </script>
+    
+    <div class="row">
+        <div class="tile" data-title="네이버">
+            <a href="https://www.naver.com">
+                <img src="https://jisan93-link.github.io/link-home/ico/naver.ico" alt="네이버">
+            </a>
+        </div>
+        <div class="tile" data-title="다음">
+            <a href="https://www.daum.net">
+                <img src="https://jisan93-link.github.io/link-home/ico/daum.ico" alt="다음">
+            </a>
+        </div>
+        <div class="tile" data-title="구글">
+            <a href="https://www.google.com">
+                <img src="https://jisan93-link.github.io/link-home/ico/google.ico" alt="구글">
+            </a>
+        </div>
+        <div class="tile" data-title="달력">
+            <a href="https://search.naver.com/search.naver?where=nexearch&sm=top_sly.hst&fbm=0&acr=1&ie=utf8&query=%EB%8B%AC%EB%A0%A5">
+                <img src="https://jisan93-link.github.io/link-home/ico/cal.ico" alt="달력">
+            </a>
+        </div>
+        <div class="tile" data-title="지도">
+            <a id="map-link" href="#">
+                <img src="https://jisan93-link.github.io/link-home/ico/map.ico" alt="지도">
+            </a>
+        </div>
+        <div class="tile" data-title="휴양림">
+            <a href="https://www.foresttrip.go.kr/main.do?hmpgId=FRIP">
+                <img src="https://jisan93-link.github.io/link-home/ico/cabin.ico" alt="휴양림">
+            </a>
+        </div>
+        <div class="tile" data-title="네비게이션">
+            <a href="https://www.fine-drive.com/defaults/index.do">
+                <img src="https://jisan93-link.github.io/link-home/ico/fine.ico" alt="파인드라이브̺">
+            </a>
+        </div>
+        <div class="tile" data-title="유가">
+            <a href="https://www.opinet.co.kr/searRgSelect.do">
+                <img src="https://jisan93-link.github.io/link-home/ico/oil.ico" alt="유가">
+            </a>
+        </div>
+        <div class="tile" data-title="하이패스">
+            <a href="https://www.extoll.co.kr/">
+                <img src="https://jisan93-link.github.io/link-home/ico/ex.ico" alt="하이패스">
+    		</a>
+		</div>
+	</div>
+	
+	<div class="row">
+  		<div class="tile" data-title="메일">
+    			<a href="https://email.kfri.re.kr/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/Mail.ico" alt="메일">
+    			</a>
+		</div>
+  		  <div class="tile" data-title="일정">
+      			  <a href="https://calendar.google.com/calendar/u/0/r/month?pli=1">
+      			      <img src="https://jisan93-link.github.io/link-home/ico/gcal4.ico" alt="일정">
+    			        <div class="date">
+             			   <script>
+			                const date2 = new Date().getDate(); // 직접 new Date() 사용
+    	 			        document.write(date2);
+                		   </script>
+            			</div>
+        		</a>
+    		</div>
+		
+		<div class="tile" data-title="출연연">
+    		<a href="https://search.naver.com/search.naver?where=news&sm=tab_jum&query=%EC%B6%9C%EC%97%B0%EC%97%B0">
+        		<img src="https://jisan93-link.github.io/link-home/ico/news.ico" alt="출연연">
+    		</a>
+		</div>
+
+		<div class="tile" data-title="식품연">
+    		<a href="https://search.naver.com/search.naver?where=news&sm=tab_jum&query=%EC%8B%9D%ED%92%88%EC%97%B0">
+        		<img src="https://jisan93-link.github.io/link-home/ico/news.ico" alt="식품연" >
+    		</a>
+		</div>
+
+		<div class="tile" data-title="대덕넷">
+    		<a href="https://www.hellodd.com/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/dd.ico" alt="대덕넷">
+    		</a>
+		</div>
+		<div class="tile empty">
+    		<p></p>
+		</div>
+
+		<div class="tile" data-title="식품연">
+    		<a href="https://www.kfri.re.kr/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/kfri.ico" alt="식품연" >
+    		</a>
+		</div>
+
+		<div class="tile" data-title="연구회">
+    		<a href="https://www.nst.re.kr/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/nst2.ico" alt="연구회" >
+    		</a>
+		</div>
+		<div class="tile" data-title="과기부">
+    		<a href="https://www.msit.go.kr/web/main/main.do">
+        		<img src="https://jisan93-link.github.io/link-home/ico/sci.ico" alt="과기부">
+    		</a>
+		</div>
+
+	</div>
+	
+	<div class="row">
+		<div class="tile" data-title="날씨">
+    		<a href="https://weather.naver.com/rgn/townWetr.nhn">
+        		<img src="https://jisan93-link.github.io/link-home/ico/weather.ico" alt="날씨">
+    		</a>
+		</div>  
+
+		<div class="tile" data-title="날씨영상">
+    		<a id="weather-link" href="#">
+        		<img src="https://jisan93-link.github.io/link-home/ico/weather2.ico" alt="날씨영상">
+    		</a>
+		</div>  
+		<div class="tile" data-title="WINDY">
+    		<a href="https://www.windy.com/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/windy.ico" alt="윈디">
+    		</a>
+		</div>
+		
+		<div class="tile" data-title="대기상태">
+    		<a href="https://aqicn.org/city/korea/jeonbuk/hyeoksin-dong">
+        		<img src="https://jisan93-link.github.io/link-home/ico/aqi.ico" alt="대기상태">
+    		</a>
+		</div>
+
+		<div class="tile empty">
+    		<p></p>
+		</div> 
+
+		<div class="tile empty">
+    		<p></p>
+		</div> 
+		
+		<div class="tile" data-title="KIRD">
+    		<a href="https://alpha-campus.kr/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/kird.ico" alt="KIRD">
+    		</a>
+		</div>  
+		<div class="tile" data-title="나라">
+    		<a id="nara-link" href="#">
+        		<img src="https://jisan93-link.github.io/link-home/ico/mar.ico" alt="나라">
+    		</a>
+		</div>
+		
+		<div class="tile" data-title="인지">
+    		<a id="dlswl-link" href="#">
+        		<img src="https://jisan93-link.github.io/link-home/ico/duty.ico" alt="인지">
+    		</a>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="tile" data-title="짱와레즈">
+    		<a href="https://fun.jjang0u.com/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/jjang.ico" alt="짱와레즈">
+    		</a>
+		</div>
+		<div class="tile" data-title="딴지일보">
+    		<a href="https://www.ddanzi.com/hot_all">
+        		<img src="https://jisan93-link.github.io/link-home/ico/ddanzi.ico" alt="딴지일보">
+    		</a>
+		</div>	
+		<div class="tile" data-title="보배드림">
+    		<a href="https://www.bobaedream.co.kr/list?code=best">
+        		<img src="https://jisan93-link.github.io/link-home/ico/bobae.ico" alt="보배드림">
+    		</a>
+		</div>
+	
+		<div class="tile" data-title="유튜브">
+    		<a href="https://www.youtube.com/?hl=ko&gl=KR&app=desktop">
+        		<img src="https://jisan93-link.github.io/link-home/ico/youtube.ico" alt="유튜브">
+    		</a>
+		</div>
+		
+		<div class="tile empty">
+		</div>
+
+		<div class="tile" data-title="우리은행">
+    		<a href="https://www.wooribank.com/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/woori.ico" alt="우리은행">
+    		</a>
+		</div>
+
+		<div class="tile" data-title="하나카드">
+    		<a href="https://www.hanacard.co.kr/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/hana.ico" alt="하나카드">
+    		</a>
+		</div>
+
+		<div class="tile" data-title="공제회">
+    		<a href="https://www.sema.or.kr/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/dedu.ico" alt="공제회">
+    		</a>
+		</div>
+		<div class="tile" data-title="가계부">
+    		<a id="account-link" href="#">
+        		<img src="https://jisan93-link.github.io/link-home/ico/Account.ico" alt="가계부">
+    		</a>
+		</div>
+	</div>
+	
+	<div class="row" >
+		<div class="tile" data-title="에누리">
+    		<a href="https://www.enuri.com/Index.jsp">
+        		<img src="https://jisan93-link.github.io/link-home/ico/enuri.ico" alt="에누리">
+    		</a>
+		</div>
+
+		<div class="tile" data-title="다나와">
+    		<a href="https://www.danawa.com/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/danawa.ico" alt="다나와">
+    		</a>
+		</div>
+		<div class="tile" data-title="쿠팡">
+    		<a href="https://www.coupang.com/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/coupang.ico" alt="쿠팡">
+    		</a>
+		</div>
+		<div class="tile" data-title="지마켓">
+    		<a href="https://www.gmarket.co.kr/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/Gmarket.ico" alt="지마켓">
+    		</a>
+		</div>
+		
+		<div class="tile" data-title="옥션">
+    		<a href="https://www.auction.co.kr/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/auction.ico" alt="옥션">
+    		</a>
+		</div>
+		
+		<div class="tile" data-title="11ST">
+    		<a href="https://www.11st.co.kr/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/11st.ico" alt="11ST">
+    		</a>
+		</div>
+		
+		<div class="tile" data-title="아이허브">
+    		<a href="https://kr.iherb.com/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/iherb.ico" alt="아이허브">
+    		</a>
+		</div>
+		<div class="tile" data-title="YES24">
+    		<a href="https://www.yes24.com/Default.aspx">
+        		<img src="https://jisan93-link.github.io/link-home/ico/yes.ico" alt="YES24">
+    		</a>
+		</div>
+		
+		<div class="tile" data-title="KT">
+    		<a href="https://www.kt.com/">
+        		<img src="https://jisan93-link.github.io/link-home/ico/kt.ico" alt="KT">
+    		</a>
+		</div>
+	</div>
+	
+    <div class="row">
+        <div class="tile" data-title="NAS">
+            <a id="nasman-link" href="">
+                <img src="https://jisan93-link.github.io/link-home/ico/nas.ico" alt="nas">
+            </a>
+        </div>
+
+        <div class="tile" data-title="NAS photo">
+            <a id="nas-link" href="/photo/">
+                <img src="https://jisan93-link.github.io/link-home/ico/photo.ico" alt="photo">
+            </a>
+        </div>
+
+        <div class="tile" data-title="NAS Note">
+            <a id="nas-link" href="/note/">
+                <img src="https://jisan93-link.github.io/link-home/ico/note.ico" alt="note">
+            </a>
+        </div>
+
+        <div class="tile" data-title="NAS VIDEO">
+            <a id="nasmov-link" href="">
+                <img src="https://jisan93-link.github.io/link-home/ico/movie.ico" alt="video">
+            </a>
+        </div>
+
+        <div class="tile" data-title="NSA MUSIC">
+            <a id="nas-link" href="/audio/">
+                <img src="https://jisan93-link.github.io/link-home/ico/Music.png" alt="music">
+            </a>
+        </div>
+
+        <div class="tile" data-title="NAS File">
+            <a id="nas-link" href="/file/">
+                <img src="https://jisan93-link.github.io/link-home/ico/file.ico" alt="file">
+            </a>
+        </div>
+
+        <div class="tile" data-title="NAS VMM">
+            <a id="nasLink" href="/vmm/">
+                <img src="https://jisan93-link.github.io/link-home/ico/vmm.ico" alt="vmm">
+            </a>
+        </div>
+
+        <div class="tile empty">
+            <p></p>
+        </div>
+
+        <div class="tile empty">
+            <p></p>
+        </div>
+    </div>
+
+</body>
+</html>
