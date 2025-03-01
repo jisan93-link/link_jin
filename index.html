@@ -197,44 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.backgroundImage = `url(${images[index]})`;
 
 
-	async function fetchWeatherData() {
-            try {
-                // 프록시 서버를 통해 네이버 날씨 페이지 요청 (CORS 우회)
-                const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // 임시 프록시 (실제로는 자체 서버 필요)
-                const weatherUrl = 'https://weather.naver.com/today/13710330';
-                const response = await fetch(proxyUrl + weatherUrl);
-                const htmlText = await response.text();
-
-                // DOM 파싱
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlText, 'text/html');
-
-                // 네이버 날씨 페이지에서 현재 날씨 상태 추출 (예: "흐림", "맑음" 등)
-                const weatherElement = doc.querySelector('.weather'); // 네이버 날씨의 실제 클래스명 필요
-                const currentWeather = weatherElement ? weatherElement.textContent.trim() : '정보 없음';
-
-                // 아이콘 업데이트
-                const weatherIcon = document.getElementById('weather-icon');
-                weatherIcon.setAttribute('data-tooltip', currentWeather);
-
-                // 날씨에 따라 클래스 동적 변경 (예: 흐림 -> ico_animation_wt7)
-                if (currentWeather.includes('흐림')) {
-                    weatherIcon.className = 'ico_animation ico_animation_wt7';
-                } else if (currentWeather.includes('맑음')) {
-                    weatherIcon.className = 'ico_animation ico_animation_wt1'; // 예시 클래스
-                } else {
-                    weatherIcon.className = 'ico_animation'; // 기본값
-                }
-            } catch (error) {
-                console.error('날씨 데이터를 가져오는 데 실패했습니다:', error);
-                document.getElementById('weather-icon').setAttribute('data-tooltip', '오류');
-            }
-        }
-
-        // 페이지 로드 시와 주기적으로 업데이트
-        window.onload = fetchWeatherData;
-        setInterval(fetchWeatherData, 600000); // 10분마다 업데이트
-
     </script>
     
     <div class="row">
@@ -344,14 +306,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	</div>
 	
 	<div class="row">
-      		<div class="tile" data-title="날씨">
-            		<a id="weather-link" href="https://weather.naver.com/today">
-                	<i id="weather-icon" class="ico_animation" data-ymdt="2025030121" data-tooltip="로딩 중..."></i>
-            		</a>
-        	</div>
+		<div class="tile" data-title="날씨">
+    			<a href="https://weather.naver.com/rgn/townWetr.nhn">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/weather.ico" alt="날씨">
+    		</a>
+		</div>  
 
 		<div class="tile" data-title="날씨영상">
-    		<a id="weather-link" href="#">
+    			<a id="weather-link" href="#">
         		<img src="https://jisan93-link.github.io/link_jin/ico/weather2.ico" alt="날씨영상">
     		</a>
 		</div>  
