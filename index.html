@@ -195,6 +195,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 배경 이미지 설정
         document.body.style.backgroundImage = `url(${images[index]})`;
+
+
+	async function fetchWeatherData() {
+            try {
+                // 프록시 서버를 통해 네이버 날씨 페이지 요청 (CORS 우회)
+                const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // 임시 프록시 (실제로는 자체 서버 필요)
+                const weatherUrl = 'https://weather.naver.com/today/13710330';
+                const response = await fetch(proxyUrl + weatherUrl);
+                const htmlText = await response.text();
+
+                // DOM 파싱
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlText, 'text/html');
+
+                // 네이버 날씨 페이지에서 현재 날씨 상태 추출 (예: "흐림", "맑음" 등)
+                const weatherElement = doc.querySelector('.weather'); // 네이버 날씨의 실제 클래스명 필요
+                const currentWeather = weatherElement ? weatherElement.textContent.trim() : '정보 없음';
+
+                // 아이콘 업데이트
+                const weatherIcon = document.getElementById('weather-icon');
+                weatherIcon.setAttribute('data-tooltip', currentWeather);
+
+                // 날씨에 따라 클래스 동적 변경 (예: 흐림 -> ico_animation_wt7)
+                if (currentWeather.includes('흐림')) {
+                    weatherIcon.className = 'ico_animation ico_animation_wt7';
+                } else if (currentWeather.includes('맑음')) {
+                    weatherIcon.className = 'ico_animation ico_animation_wt1'; // 예시 클래스
+                } else {
+                    weatherIcon.className = 'ico_animation'; // 기본값
+                }
+            } catch (error) {
+                console.error('날씨 데이터를 가져오는 데 실패했습니다:', error);
+                document.getElementById('weather-icon').setAttribute('data-tooltip', '오류');
+            }
+        }
+
+        // 페이지 로드 시와 주기적으로 업데이트
+        window.onload = fetchWeatherData;
+        setInterval(fetchWeatherData, 600000); // 10분마다 업데이트
+
     </script>
     
     <div class="row">
@@ -304,28 +344,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	</div>
 	
 	<div class="row">
-		<div class="tile" data-title="날씨">
-    		<a href="https://weather.naver.com/rgn/townWetr.nhn">
-			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 112 112" width="72" height="72" preserveAspectRatio="xMidYMid meet">
-                    <defs>
-                        <clipPath id="__lottie_element_110"><rect width="112" height="112" x="0" y="0"></rect></clipPath>
-                        <image xlink:href="data:image/webp;base64,UklGRvQBAABXRUJQVlA4WAoAAAAQAAAAVQAANwAAQUxQSCYBAAABkFBrb91IgiAIgmAIhjAMJgxmGLQMbAYeBoVgCIEgCILwz2M3D/kHEBETIFn1rb3cAcQ+21aEoj4mzvqoy9WJa31bqkxc79sy2nDvtDXMcXd8rvAeSPjI94GcL032QNY91wfyjkyGzI885qlQ0wzkDs2hDdnbTVrbywMr1jtqCyw7r6sTS9eLtGHxfo05Vg+9ogTW3y4oAYLjnDkYxil1cLQzDSSfJwwsoxybNIBhBwqotv8NLnD7V5CBlz8VdN1E5MkHriKTEJrIzggmQakLKIdywhachnPaX5yic0IlpUEppFPapVIaIpPRJlIZqYh0PkNERJ2O/RELMl3+XYKKy/+LE3E7IOY0vMhh7STc5KxNBl3lwvIVa0U3ubo+5x5LxD42lYNWUDggqAAAALAGAJ0BKlYAOAA+bTKUR6QioiEoCACADYlnAMo8ERzKSqeL+7waVhByf45OVq2LE+b60XICK/svF6Oej4GAAP7+hvY//uFxN3/dsEj/dG1htaOrrElie71X//pYEXrzFDPzw/HrMwACnyQ4ahj//+kwHtmIVVdlgW6kLyUgXUPVFRA3LbUqH0RV3+7vveSSl3/z6A4Z2LuAAoiq8rbMFb4Gl0qQWAAAAA=="></image>
-                        <image xlink:href="data:image/webp;base64,UklGRmACAABXRUJQVlA4WAoAAAAQAAAAZwAAQwAAQUxQSF0BAAABgFZtb91GEARBEArBEMJgZlAzsBmkDAYhYyAIgSAIgvDtnoul/xExAXR7Lu1dzQHAdBuLUMjc1HF4X0s4i+Js6xIId8el7xJFNVy+SgSiuKPV+Z6Om6482Yr7mszEO+5sj3nEcG8vs4jh7v6Yg3fc3x9TrJjRZIKOOfV+glnX29k0KPd6KObVe3BZNzNM3q7jqo4InS/i7ohyXPN0xOlXiCLUct6bI1Y9rSNa55M64l3P6Yi4n/FEzFYPiQcFqBwwxO3tX0+E3v8hFhv6Xx3R9z8sPLRfKuJ3+aEJQImIkeJCVHIwopEDCm1JKO1JOHsSWJDlK42PNMyy8DSwpfHKwksWO3sSSprEi2oSC7HnwEQjhQ8iYs9gISJqCRj9usdXfxOPbqc/a3Auf9GIrdF/R2SD/j/iGnS0eVCDjotF5I1ObRaOCp0sw0LZC11ZNQrXQldzGdvuk22vhekoAFZQOCDcAAAA8AkAnQEqaABEAD5tMpFHJCMhoSkrgIANiWcAzR3/76h+AH0Afn0JWUhT9H8UPBOQasch+1kBKQQFuZYmiojoBbPFlfge4oR+BHrBZMOiIlvvrXfF4IBWvAD++5zw/YDn/rdXgWqJSTR77Mf67OroQXH09r2uopd9hGcBF8855R5kjMmvnCLzcRsv9ESXtntUYgAF5t0Yas7UXHSXgFBh90/J0dy4VK93CtWZL3Hn0UUzk/cHJ/DhA1abSqDCf+PK//8dfApVA4x9Kiwas6NaZRW/YsQTo2ni7yEUAA=="></image>
-                        <clipPath id="__lottie_element_112"><path d="M0,0 L112,0 L112,112 L0,112z"></path></clipPath>
-                    </defs>
-                    <g clip-path="url(#__lottie_element_110)">
-                        <g clip-path="url(#__lottie_element_112)" transform="matrix(1,0,0,1,0,0)" opacity="1" style="display: block;">
-                            <g class="png" transform="matrix(1,0,0,1,1.2471580505371094,12)" opacity="1" style="display: block;">
-                                <image width="104px" height="68px" preserveAspectRatio="xMidYMid slice" xlink:href="data:image/webp;base64,UklGRmACAABXRUJQVlA4WAoAAAAQAAAAZwAAQwAAQUxQSF0BAAABgFZtb91GEARBEArBEMJgZlAzsBmkDAYhYyAIgSAIgvDtnoul/xExAXR7Lu1dzQHAdBuLUMjc1HF4X0s4i+Js6xIId8el7xJFNVy+SgSiuKPV+Z6Om6482Yr7mszEO+5sj3nEcG8vs4jh7v6Yg3fc3x9TrJjRZIKOOfV+glnX29k0KPd6KObVe3BZNzNM3q7jqo4InS/i7ohyXPN0xOlXiCLUct6bI1Y9rSNa55M64l3P6Yi4n/FEzFYPiQcFqBwwxO3tX0+E3v8hFhv6Xx3R9z8sPLRfKuJ3+aEJQImIkeJCVHIwopEDCm1JKO1JOHsSWJDlK42PNMyy8DSwpfHKwksWO3sSSprEi2oSC7HnwEQjhQ8iYs9gISJqCRj9usdXfxOPbqc/a3Auf9GIrdF/R2SD/j/iGnS0eVCDjotF5I1ObRaOCp0sw0LZC11ZNQrXQldzGdvuk22vhekoAFZQOCDcAAAA8AkAnQEqaABEAD5tMpFHJCMhoSkrgIANiWcAzR3/76h+AH0Afn0JWUhT9H8UPBOQasch+1kBKQQFuZYmiojoBbPFlfge4oR+BHrBZMOiIlvvrXfF4IBWvAD++5zw/YDn/rdXgWqJSTR77Mf67OroQXH09r2uopd9hGcBF8855R5kjMmvnCLzcRsv9ESXtntUYgAF5t0Yas7UXHSXgFBh90/J0dy4VK93CtWZL3Hn0UUzk/cHJ/DhA1abSqDCf+PK//8dfApVA4x9Kiwas6NaZRW/YsQTo2ni7yEUAA=="></image>
-                            </g>
-                            <g class="png" transform="matrix(1,0,0,1,23.858238220214844,44)" opacity="1" style="display: block;">
-                                <image width="86px" height="56px" preserveAspectRatio="xMidYMid slice" xlink:href="data:image/webp;base64,UklGRvQBAABXRUJQVlA4WAoAAAAQAAAAVQAANwAAQUxQSCYBAAABkFBrb91IgiAIgmAIhjAMJgxmGLQMbAYeBoVgCIEgCILwz2M3D/kHEBETIFn1rb3cAcQ+21aEoj4mzvqoy9WJa31bqkxc79sy2nDvtDXMcXd8rvAeSPjI94GcL032QNY91wfyjkyGzI885qlQ0wzkDs2hDdnbTVrbywMr1jtqCyw7r6sTS9eLtGHxfo05Vg+9ogTW3y4oAYLjnDkYxil1cLQzDSSfJwwsoxybNIBhBwqotv8NLnD7V5CBlz8VdN1E5MkHriKTEJrIzggmQakLKIdywhachnPaX5yic0IlpUEppFPapVIaIpPRJlIZqYh0PkNERJ2O/RELMl3+XYKKy/+LE3E7IOY0vMhh7STc5KxNBl3lwvIVa0U3ubo+5x5LxD42lYNWUDggqAAAALAGAJ0BKlYAOAA+bTKUR6QioiEoCACADYlnAMo8ERzKSqeL+7waVhByf45OVq2LE+b60XICK/svF6Oej4GAAP7+hvY//uFxN3/dsEj/dG1htaOrrElie71X//pYEXrzFDPzw/HrMwACnyQ4ahj//+kwHtmIVVdlgW6kLyUgXUPVFRA3LbUqH0RV3+7vveSSl3/z6A4Z2LuAAoiq8rbMFb4Gl0qQWAAAAA=="></image>
-                            </g>
-                        </g>
-                    </g>
-                </svg>
-    		</a>
-	</div>  
+      		<div class="tile" data-title="날씨영상">
+            		<a id="weather-link" href="https://weather.naver.com/today">
+                	<i id="weather-icon" class="ico_animation" data-ymdt="2025030121" data-tooltip="로딩 중..."></i>
+            		</a>
+        	</div>
 
 		<div class="tile" data-title="날씨영상">
     		<a id="weather-link" href="#">
