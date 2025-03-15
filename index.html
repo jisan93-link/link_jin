@@ -160,19 +160,25 @@ async function getUserIP() {
     }
 }
 
-    async function setLinks() {
-        const userIP = await getUserIP();
-        const config = linksConfig[userIP] || linksConfig['default'];
-
-        Object.keys(config).forEach(id => {
-            const linkElement = document.getElementById(id);
-            if (linkElement) {
-                linkElement.href = config[id];
-            } else {
-                console.warn(`요소 ID '${id}'를 찾을 수 없습니다.`);
-            }
-        });
-    }
+	async function setLinks() {
+	    const userIP = await getUserIP();
+	    const config = linksConfig[userIP] || linksConfig['default'];
+	
+	    Object.keys(config).forEach(id => {
+	        const linkElement = document.getElementById(id);
+	        if (linkElement) {
+	            // 상대 경로 추가
+	            if (id === 'nas-link') {
+	                const relativePath = linkElement.getAttribute('href'); // HTML에서 상대 경로 가져오기
+	                linkElement.href = config[id] + relativePath; // 절대 경로 + 상대 경로 설정
+	            } else {
+	                linkElement.href = config[id];
+	            }
+	        } else {
+	            console.warn(`요소 ID '${id}'를 찾을 수 없습니다.`);
+	        }
+	    });
+	}
 
     setLinks();
 });
