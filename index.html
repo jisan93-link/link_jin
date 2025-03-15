@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function getUserIP() {
     try {
-        const response = await fetch('https://api.ipify.org?format=json', { timeout: 15000 }); // 10초 타임아웃
+        const response = await fetch('https://api.ipify.org?format=json', { timeout: 5000 }); // 10초 타임아웃
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -478,13 +478,13 @@ async function getUserIP() {
         </div>
 
         <div class="tile" data-title="NAS photo">
-            <a id="nas-link" href="/photo/">
+            <a id="nas-link" href="https://jisan93.myds.me/photo/">
                 <img src="https://jisan93-link.github.io/link_jin/ico/photo.ico" alt="photo">
             </a>
         </div>
 
         <div class="tile" data-title="NAS Note">
-            <a id="nas-link" href="/note/">
+            <a id="nas-link" href="https://jisan93.myds.me/note/">
                 <img src="https://jisan93-link.github.io/link_jin/ico/note.ico" alt="note">
             </a>
         </div>
@@ -496,19 +496,19 @@ async function getUserIP() {
         </div>
 
         <div class="tile" data-title="NSA MUSIC">
-            <a id="nas-link" href="/audio/">
+            <a id="nas-link" href="https://jisan93.myds.me/audio/">
                 <img src="https://jisan93-link.github.io/link_jin/ico/Music.png" alt="music">
             </a>
         </div>
 
         <div class="tile" data-title="NAS File">
-            <a id="nas-link" href="/file/">
+            <a id="nas-link" href="https://jisan93.myds.me/file/">
                 <img src="https://jisan93-link.github.io/link_jin/ico/file.ico" alt="file">
             </a>
         </div>
 
         <div class="tile" data-title="NAS VMM">
-            <a id="nasLink" href="/vmm/">
+            <a id="nasLink" href="https://jisan93.myds.me/vmm/">
                 <img src="https://jisan93-link.github.io/link_jin/ico/vmm.ico" alt="vmm">
             </a>
         </div>
