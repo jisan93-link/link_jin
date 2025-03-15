@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function getUserIP() {
     try {
-        const response = await fetch('https://api.ipify.org?format=json', { timeout: 5000 }); // 10초 타임아웃
+        const response = await fetch('https://api.ipify.org?format=json', { timeout: 15000 }); // 10초 타임아웃
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
