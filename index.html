@@ -136,17 +136,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 'NAS': {
                     'link': 'https://www.g2b.go.kr/', // NAS를 나라 링크로 변경
                     'icon': 'https://jisan93-link.github.io/link_jin/ico/mar.ico', // 나라 아이콘
-                    'title': '나라장터' // NAS를 나라로 표시
+                    'title': '나라장터', // NAS를 나라로 표시
+		    'visible': true
                 },
 		 'NAS Photo': {
                     'link': 'https://www.e-revenuestamp.or.kr/index.giro', 
                     'icon': 'https://jisan93-link.github.io/link_jin/ico/duty.ico', 
-                    'title': '인지세' 
+                    'title': '인지세',
+		    'visible': true
                 },
 		 'NAS Note': {
                     'link': 'https://www.c-market.net/', 
                     'icon': 'https://jisan93-link.github.io/link_jin/ico/c-market.ico',
-                    'title': '씨마켓' // NAS를 나라로 표시
+                    'title': '씨마켓', // NAS를 나라로 표시
+		    'visible': true
                 },
 		 'NAS Video': {
 			'visible': false
@@ -180,38 +183,44 @@ document.addEventListener('DOMContentLoaded', () => {
                 'NAS': {
                     'link': 'https://dsm.jisan93.myds.me',
                     'icon': 'https://jisan93-link.github.io/link_jin/ico/nas.ico',
-                    'title': 'NAS'
+                    'title': 'NAS',
+		    'visible': true
                 },
 		'NAS Photo': {
                     'link': 'https://jisan93.myds.me/photo',
                     'icon': 'https://jisan93-link.github.io/link_jin/ico/photo.ico',
-                    'title': 'NAS Photo'
+                    'title': 'NAS Photo',
+		    'visible': true
                 },
 		'NAS Note': {
-                    'link': 'https://www.c-market.net/',
-                    'icon': 'https://jisan93.myds.me/note', 
-                    'title': '씨마켓'
+                    'link': 'https://jisan93.myds.me/note',
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/note.ico', 
+                    'title': '씨마켓',
+		    'visible': true
                 },
 		'NAS Video': {
 		    'link': 'https://video.jisan93.myds.me',
 		    'icon': 'https://jisan93-link.github.io/link_jin/ico/movie.ico',
-		    'title': 'NAS Video'
+		    'title': 'NAS Video',
+		    'visible': true
                 },
 		 'NAS Music': {
 		    'link': 'https://jisan93.myds.me/audio',
 		    'icon': 'https://jisan93-link.github.io/link_jin/ico/Music.ico',
-		    'title': 'NAS Music'
+		    'title': 'NAS Music',
+		    'visible': true
 		},
 		 'NAS File': {
 		    'link': 'https://jisan93.myds.me/file',
 		    'icon': 'https://jisan93-link.github.io/link_jin/ico/file.ico',
-		    'title': 'NAS File'
-			 
-                 },
+		    'title': 'NAS File',
+		    'visible': true
+		 },
 		'NAS VMM': {
 		    'link': 'https://jisan93.myds.me/vmm',
 		    'icon': 'https://jisan93-link.github.io/link_jin/ico/vmm.ico',
-		    'title': 'NAS VMM'
+		    'title': 'NAS VMM',
+		    'visible': true
                 }		    
             }
 	}
@@ -608,7 +617,7 @@ async function getUserIP() {
             </a>
         </div>
 
-        <div class="tile" data-title="NSA Music">
+        <div class="tile" data-title="NAS Music">
             <a id="nas-music-link" href="">
                 <img src="https://jisan93-link.github.io/link_jin/ico/Music.png" alt="music">
             </a>
