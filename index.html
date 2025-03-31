@@ -281,7 +281,8 @@ async function getUserIP() {
             }
         });
 
-	const tiles = document.querySelectorAll('.tile');
+// 타일 내용 및 표시 여부 동적 수정
+        const tiles = document.querySelectorAll('.tile');
         tiles.forEach(tile => {
             const title = tile.getAttribute('data-title');
             if (title && config.tiles.hasOwnProperty(title)) {
@@ -289,12 +290,8 @@ async function getUserIP() {
                 const linkElement = tile.querySelector('a');
                 const imgElement = tile.querySelector('img');
 
-                // 표시 여부 설정: empty 클래스 추가/제거
-                if (tileConfig.visible) {
-                    tile.classList.remove('empty'); // 보이게 할 경우 empty 제거
-                } else {
-                    tile.classList.add('empty'); // 숨길 경우 empty 추가
-                }
+                // 표시 여부 설정
+                tile.style.display = tileConfig.visible ? 'flex' : 'none';
 
                 // 표시되는 경우에만 링크, 아이콘, 제목 업데이트
                 if (tileConfig.visible) {
@@ -305,8 +302,8 @@ async function getUserIP() {
             }
         });
     }
-setLinksAndTiles();
-	
+
+    setLinksAndTiles();
 });
 </script>
 </head>
