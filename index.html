@@ -272,8 +272,7 @@ async function getUserIP() {
             }
         });
 
-        // 타일 내용 동적 수정
-        const tiles = document.querySelectorAll('.tile');
+    const tiles = document.querySelectorAll('.tile');
         tiles.forEach(tile => {
             const title = tile.getAttribute('data-title');
             if (title && config.tiles.hasOwnProperty(title)) {
@@ -281,14 +280,18 @@ async function getUserIP() {
                 const linkElement = tile.querySelector('a');
                 const imgElement = tile.querySelector('img');
 
-                // 링크, 아이콘, 제목 업데이트
-                linkElement.href = tileConfig.link;
-                imgElement.src = tileConfig.icon;
-                tile.setAttribute('data-title', tileConfig.title);
+                // 표시 여부 설정
+                tile.style.display = tileConfig.visible ? 'flex' : 'none';
+
+                // 표시되는 경우에만 링크, 아이콘, 제목 업데이트
+                if (tileConfig.visible) {
+                    linkElement.href = tileConfig.link;
+                    imgElement.src = tileConfig.icon;
+                    tile.setAttribute('data-title', tileConfig.title);
+                }
             }
         });
     }
-
     setLinksAndTiles();
 
 
