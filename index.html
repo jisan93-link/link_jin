@@ -139,20 +139,32 @@ document.addEventListener('DOMContentLoaded', () => {
 		 'NAS Note': {
                     'link': 'https://www.c-market.net/', 
                     'icon': 'https://jisan93-link.github.io/link_jin/ico/c-market.png',
-                    'title': '씨마켓', // NAS를 나라로 표시
+                    'title': '씨마켓', 
 		    'visible': true
                 },
 		 'NAS Video': {
-			'visible': false
+                    'link': 'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=%EC%B6%9C%EC%97%B0%EC%97%B0', 
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/news.ico',
+                    'title': '출연연',
+		    'visible': true
                 },
 		 'NAS Music': {
-			'visible': false
+                    'link': 'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=%EC%8B%9D%ED%92%88%EC%97%B0', 
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/news.ico',
+                    'title': '출연연',
+		    'visible': true
                 },
 		 'NAS File': {
-			'visible': false
+                    'link': 'https://www.hellodd.com/', 
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/dd.png',
+                    'title': '대덕넷', 
+		    'visible': true
                 },
 		'NAS VMM': {
-			'visible': false
+                    'link': 'https://www.extoll.co.kr/', 
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/ex.ico',
+                    'title': '하이패스', 
+		    'visible': true
                 }		    
             }
         },
@@ -365,11 +377,9 @@ setLinksAndTiles();
                 <img src="https://jisan93-link.github.io/link_jin/ico/oil.ico" alt="유가">
             </a>
         </div>
-        <div class="tile" data-title="하이패스">
-            <a href="https://www.extoll.co.kr/">
-                <img src="https://jisan93-link.github.io/link_jin/ico/ex.ico" alt="하이패스">
-    		</a>
-		</div>
+		<div class="tile empty">
+    		<p></p>
+		</div> 
 	</div>
 	
 	<div class="row">
@@ -390,23 +400,19 @@ setLinksAndTiles();
         		</a>
     		</div>
 		
-		<div class="tile" data-title="출연연">
-    		<a href="https://search.naver.com/search.naver?where=news&sm=tab_jum&query=%EC%B6%9C%EC%97%B0%EC%97%B0">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/news.ico" alt="출연연">
+		<div class="tile" data-title="KIRD">
+    		<a href="https://alpha-campus.kr/">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/kird.ico" alt="KIRD">
     		</a>
-		</div>
+		</div>  
 
-		<div class="tile" data-title="식품연">
-    		<a href="https://search.naver.com/search.naver?where=news&sm=tab_jum&query=%EC%8B%9D%ED%92%88%EC%97%B0">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/news.ico" alt="식품연" >
-    		</a>
-		</div>
+		<div class="tile empty">
+    		<p></p>
+		</div> 
 
-		<div class="tile" data-title="대덕넷">
-    		<a href="https://www.hellodd.com/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/dd.ico" alt="대덕넷">
-    		</a>
-		</div>
+		<div class="tile empty">
+    		<p></p>
+		</div> 
 		<div class="tile empty">
     		<p></p>
 		</div>
@@ -461,12 +467,9 @@ setLinksAndTiles();
 		<div class="tile empty">
     		<p></p>
 		</div> 
-		
-		<div class="tile" data-title="KIRD">
-    		<a href="https://alpha-campus.kr/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/kird.ico" alt="KIRD">
-    		</a>
-		</div>  
+		<div class="tile empty">
+    		<p></p>
+		</div>
 		<div class="tile empty">
     		<p></p>
 		</div> 
