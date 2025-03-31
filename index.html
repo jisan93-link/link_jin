@@ -283,10 +283,10 @@ async function getUserIP() {
             } else {
                 tile.classList.add('empty'); // 숨길 경우 empty 추가
                 // 숨길 때 링크, 아이콘, 제목, alt 비우기
-                linkElement.href = 'transparent'; // 링크 비움
-                imgElement.src = 'transparent';  // 아이콘 비움
-                imgElement.alt = 'transparent';  // alt 비움
-                tile.setAttribute('data-title', 'transparent'); // 제목 비움
+                linkElement.href = ''; // 링크 비움
+                imgElement.src = '';  // 아이콘 비움
+                imgElement.alt = '';  // alt 비움
+                tile.setAttribute('data-title', ''); // 제목 비움
             }
         }
     });
