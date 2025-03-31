@@ -143,7 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		    'visible': true
                 },
 		 'NAS Video': {
-			 'icon': 'https://via.placeholder.com/72',
 			'visible': false
                 },
 		 'NAS Music': {
@@ -263,6 +262,7 @@ async function getUserIP() {
                 }
             }
         });
+   const placeholderImage = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAjSURBVHgB7cExAQAACAIwU89u7+8gdgA/v/8DAAAAAAAKAHgXAbkW9OupAAAAAElFTkSuQmCC';
 
 // 타일 내용 및 표시 여부 동적 수정
     const tiles = document.querySelectorAll('.tile');
@@ -285,7 +285,7 @@ async function getUserIP() {
                 tile.classList.add('empty'); // 숨길 경우 empty 추가
                 // 숨길 때 링크, 아이콘, 제목, alt 비우기
                 linkElement.href = ''; // 링크 비움
-                imgElement.src = '';  // 아이콘 비움
+                imgElement.src = placeholderImage;  // 아이콘 비움
                 imgElement.alt = '';  // alt 비움
                 tile.setAttribute('data-title', ''); // 제목 비움
             }
