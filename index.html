@@ -123,30 +123,55 @@ document.addEventListener('DOMContentLoaded', () => {
 	    'weather-link': 'https://www.weather.go.kr/w/index.do#dong/5211367000/35.83507390600234/127.04950689405304/%EC%A0%84%EB%B6%81%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EC%99%84%EC%A3%BC%EA%B5%B0%20%EC%9D%B4%EC%84%9C%EB%A9%B4/SCH/%ED%95%9C%EA%B5%AD%EC%8B%9D%ED%92%88%EC%97%B0%EA%B5%AC%EC%9B%90',
             'weather2-link': 'https://www.weather.go.kr/wgis-nuri/html/map.html?_1st=radar&_2nd=pop&center=127.04950689405305,35.83507390600202&zoom=7',
             'account-link': 'https://jisan93-link.github.io/link_jin/',
-            'nara-link': 'https://www.g2b.go.kr/',
             'dlswl-link': 'https://www.e-revenuestamp.or.kr/index.giro',
-            'nasman-link': '',
             'nasmov-link': '',
 	    'nas-photo-link': '',
 	    'nas-music-link': '',
 	    'nas-note-link': '',
 	    'nas-vmm-link': '',
-	    'nas-file-link': ''
+	    'nas-file-link': '',
+	    'tiles': {
+                'NAS': {
+                    'link': 'https://www.g2b.go.kr/', // NAS를 나라 링크로 변경
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/mar.ico', // 나라 아이콘
+                    'title': '나라' // NAS를 나라로 표시
+                },
+                '나라': {
+                    'link': 'https://www.g2b.go.kr/',
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/mar.ico',
+                    'title': '나라'
+                }
+            }
+		    //'nara-link': 'https://www.g2b.go.kr/',
+	    //'nasman-link': ''
         },
         'default': {
             'map-link': 'https://map.naver.com',
 	    'weather-link': 'https://www.weather.go.kr',
             'weather2-link': 'https://www.weather.go.kr/w/image/vshrt/rain.do',
             'account-link': 'https://docs.google.com/spreadsheets/d/1BQP86KYvWIzgw8xLp365bHlCb8C0uhIxnl32dGPawdw/edit#gid=1889116597',
-            'nara-link': '',
+            //'nara-link': '',
             'dlswl-link': '',
-            'nasman-link': 'https://dsm.jisan93.myds.me',
+            //'nasman-link': 'https://dsm.jisan93.myds.me',
             'nasmov-link': 'http://video.jisan93.myds.me',
 	    'nas-photo-link': 'https://jisan93.myds.me/photo',
 	    'nas-music-link': 'https://jisan93.myds.me/audio',
 	    'nas-note-link': 'https://jisan93.myds.me/note',
 	    'nas-vmm-link': 'https://jisan93.myds.me/vmm',
-	    'nas-file-link': 'https://jisan93.myds.me/file'
+	    'nas-file-link': 'https://jisan93.myds.me/file',
+	    'tiles': {
+                'NAS': {
+                    'link': 'https://dsm.jisan93.myds.me',
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/nas.ico',
+                    'title': 'NAS'
+                },
+                '나라': {
+                    'link': '',
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/mar.ico',
+                    'title': '나라'
+                }
+            }
+        	
 	}
     };
 
@@ -189,6 +214,43 @@ async function getUserIP() {
 	}
 
     setLinks();
+	async function setLinksAndTiles() {
+        const userIP = await getUserIP();
+        const config = linksConfig[userIP] || linksConfig['default'];
+
+        // 기본 링크 설정
+        Object.keys(config).forEach(id => {
+            if (id !== 'tiles') { // 'tiles' 키는 제외
+                const linkElement = document.getElementById(id);
+                if (linkElement) {
+                    linkElement.href = config[id];
+                } else {
+                    console.warn(`요소 ID '${id}'를 찾을 수 없습니다.`);
+                }
+            }
+        });
+
+        // 타일 내용 동적 수정
+        const tiles = document.querySelectorAll('.tile');
+        tiles.forEach(tile => {
+            const title = tile.getAttribute('data-title');
+            if (title && config.tiles.hasOwnProperty(title)) {
+                const tileConfig = config.tiles[title];
+                const linkElement = tile.querySelector('a');
+                const imgElement = tile.querySelector('img');
+
+                // 링크, 아이콘, 제목 업데이트
+                linkElement.href = tileConfig.link;
+                imgElement.src = tileConfig.icon;
+                tile.setAttribute('data-title', tileConfig.title);
+            }
+        });
+    }
+
+    setLinksAndTiles();
+
+
+	
 });
     </script>
 </head>
