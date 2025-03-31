@@ -123,22 +123,44 @@ document.addEventListener('DOMContentLoaded', () => {
 	    'weather-link': 'https://www.weather.go.kr/w/index.do#dong/5211367000/35.83507390600234/127.04950689405304/%EC%A0%84%EB%B6%81%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EC%99%84%EC%A3%BC%EA%B5%B0%20%EC%9D%B4%EC%84%9C%EB%A9%B4/SCH/%ED%95%9C%EA%B5%AD%EC%8B%9D%ED%92%88%EC%97%B0%EA%B5%AC%EC%9B%90',
             'weather2-link': 'https://www.weather.go.kr/wgis-nuri/html/map.html?_1st=radar&_2nd=pop&center=127.04950689405305,35.83507390600202&zoom=7',
             'account-link': 'https://jisan93-link.github.io/link_jin/',
-            'dlswl-link': 'https://www.e-revenuestamp.or.kr/index.giro',
-            'nasmov-link': '',
-	    'nas-photo-link': '',
-	    'nas-music-link': '',
-	    'nas-note-link': '',
-	    'nas-vmm-link': '',
-	    'nas-file-link': '',
+            //'dlswl-link': 'https://www.e-revenuestamp.or.kr/index.giro',
+	    //'nara-link': 'https://www.g2b.go.kr/',
+	    //'nasman-link': ''
+            //'nasmov-link': '',
+	    //'nas-photo-link': '',
+	    //'nas-music-link': '',
+	    //'nas-note-link': '',
+	    //'nas-vmm-link': '',
+	    //'nas-file-link': '',
 	    'tiles': {
                 'NAS': {
                     'link': 'https://www.g2b.go.kr/', // NAS를 나라 링크로 변경
                     'icon': 'https://jisan93-link.github.io/link_jin/ico/mar.ico', // 나라 아이콘
-                    'title': '나라' // NAS를 나라로 표시
+                    'title': '나라장터' // NAS를 나라로 표시
                 },
+		 'NAS Photo': {
+                    'link': 'https://www.e-revenuestamp.or.kr/index.giro', // NAS를 나라 링크로 변경
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/duty.ico', // 나라 아이콘
+                    'title': '인지세' // NAS를 나라로 표시
+                },
+		 'NAS Note': {
+                    'link': 'https://www.c-market.net/', // NAS를 나라 링크로 변경
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/c-market.ico', // 나라 아이콘
+                    'title': '씨마켓' // NAS를 나라로 표시
+                },
+		 'NAS Video': {
+			'visible': false
+                },
+		 'NAS Music': {
+			'visible': false
+                },
+		 'NAS File': {
+			'visible': false
+                },
+		'NAS VMM': {
+			'visible': false
+                }		    
             }
-		    //'nara-link': 'https://www.g2b.go.kr/',
-	    //'nasman-link': ''
         },
         'default': {
             'map-link': 'https://map.naver.com',
@@ -146,22 +168,47 @@ document.addEventListener('DOMContentLoaded', () => {
             'weather2-link': 'https://www.weather.go.kr/w/image/vshrt/rain.do',
             'account-link': 'https://docs.google.com/spreadsheets/d/1BQP86KYvWIzgw8xLp365bHlCb8C0uhIxnl32dGPawdw/edit#gid=1889116597',
             //'nara-link': '',
-            'dlswl-link': '',
+            //'dlswl-link': '',
             //'nasman-link': 'https://dsm.jisan93.myds.me',
-            'nasmov-link': 'http://video.jisan93.myds.me',
-	    'nas-photo-link': 'https://jisan93.myds.me/photo',
-	    'nas-music-link': 'https://jisan93.myds.me/audio',
-	    'nas-note-link': 'https://jisan93.myds.me/note',
-	    'nas-vmm-link': 'https://jisan93.myds.me/vmm',
-	    'nas-file-link': 'https://jisan93.myds.me/file',
+            //'nasmov-link': 'http://video.jisan93.myds.me',
+	    //'nas-photo-link': 'https://jisan93.myds.me/photo',
+	    //'nas-music-link': 'https://jisan93.myds.me/audio',
+	    //'nas-note-link': 'https://jisan93.myds.me/note',
+	    //'nas-vmm-link': 'https://jisan93.myds.me/vmm',
+	    //'nas-file-link': 'https://jisan93.myds.me/file',
 	    'tiles': {
                 'NAS': {
                     'link': 'https://dsm.jisan93.myds.me',
                     'icon': 'https://jisan93-link.github.io/link_jin/ico/nas.ico',
                     'title': 'NAS'
                 },
+		'NAS Photo': {
+                    'link': 'https://jisan93.myds.me/photo',
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/photo.ico',
+                    'title': 'NAS Photo'
+                },
+		'NAS Note': {
+                    'link': 'https://www.c-market.net/',
+                    'icon': 'https://jisan93.myds.me/note', 
+                    'title': '씨마켓'
+                },
+		'NAS Video': {
+			'link': 'https://jisan93.myds.me/photo',
+			'visible': false
+                },
+		 'NAS Music': {
+			 'link': 'https://jisan93.myds.me/photo',
+			'visible': false
+                },
+		 'NAS File': {
+			 'link': 'https://jisan93.myds.me/photo',
+			'visible': false
+                },
+		'NAS VMM': {
+			'link': 'https://jisan93.myds.me/photo',
+			'visible': false
+                }		    
             }
-        	
 	}
     };
 
@@ -535,7 +582,7 @@ async function getUserIP() {
             </a>
         </div>
 
-        <div class="tile" data-title="NAS photo">
+        <div class="tile" data-title="NAS Photo">
             <a id="nas-photo-link" href="">
                 <img src="https://jisan93-link.github.io/link_jin/ico/photo.ico" alt="photo">
             </a>
@@ -547,13 +594,13 @@ async function getUserIP() {
             </a>
         </div>
 
-        <div class="tile" data-title="NAS VIDEO">
+        <div class="tile" data-title="NAS Video">
             <a id="nasmov-link" href="">
                 <img src="https://jisan93-link.github.io/link_jin/ico/movie.ico" alt="video">
             </a>
         </div>
 
-        <div class="tile" data-title="NSA MUSIC">
+        <div class="tile" data-title="NSA Music">
             <a id="nas-music-link" href="">
                 <img src="https://jisan93-link.github.io/link_jin/ico/Music.png" alt="music">
             </a>
