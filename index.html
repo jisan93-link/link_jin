@@ -127,13 +127,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	    'tiles': {
                 'NAS': {
                     'link': 'https://www.g2b.go.kr/', // NAS를 나라 링크로 변경
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/mar.ico', // 나라 아이콘
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/mar.png', // 나라 아이콘
                     'title': '나라장터', // NAS를 나라로 표시
 		    'visible': true
                 },
 		 'NAS Photo': {
                     'link': 'https://www.e-revenuestamp.or.kr/index.giro', 
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/duty.ico', 
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/duty.png', 
                     'title': '인지세',
 		    'visible': true
                 },
@@ -145,25 +145,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
 		 'NAS Video': {
                     'link': 'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=%EC%B6%9C%EC%97%B0%EC%97%B0', 
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/news.ico',
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/news.png',
                     'title': '출연연',
 		    'visible': true
                 },
 		 'NAS Music': {
                     'link': 'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=%EC%8B%9D%ED%92%88%EC%97%B0', 
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/news.ico',
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/news.png',
                     'title': '식품연',
 		    'visible': true
                 },
 		 'NAS File': {
                     'link': 'https://www.hellodd.com/', 
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/dd.ico',
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/dd.png',
                     'title': '대덕넷', 
 		    'visible': true
                 },
 		'NAS VMM': {
                     'link': 'https://www.extoll.co.kr/', 
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/ex.ico',
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/ex.png',
                     'title': '하이패스', 
 		    'visible': true
                 }		    
@@ -177,25 +177,25 @@ document.addEventListener('DOMContentLoaded', () => {
 	    'tiles': {
                 'NAS': {
                     'link': 'https://dsm.jisan93.myds.me',
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/nas.ico',
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/nas.png',
                     'title': 'NAS',
 		    'visible': true
                 },
 		'NAS Photo': {
                     'link': 'https://jisan93.myds.me/photo/?launchApp=SYNO.Foto.Sharing.AppInstance&app_name=SYNO.Foto.AppInstance&photos_action=external_login&folderId=1&alias=photo#/signin',
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/photo.ico',
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/photo.png',
                     'title': 'NAS Photo',
 		    'visible': true
                 },
 		'NAS Note': {
                     'link': 'https://jisan93.myds.me/note',
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/note.ico', 
+                    'icon': 'https://jisan93-link.github.io/link_jin/ico/note.png', 
                     'title': 'NAS Note',
 		    'visible': true
                 },
 		'NAS Video': {
 		    'link': 'https://video.jisan93.myds.me',
-		    'icon': 'https://jisan93-link.github.io/link_jin/ico/movie.ico',
+		    'icon': 'https://jisan93-link.github.io/link_jin/ico/movie.png',
 		    'title': 'NAS Video',
 		    'visible': true
                 },
@@ -207,13 +207,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		},
 		 'NAS File': {
 		    'link': 'https://jisan93.myds.me/file',
-		    'icon': 'https://jisan93-link.github.io/link_jin/ico/file.ico',
+		    'icon': 'https://jisan93-link.github.io/link_jin/ico/file.png',
 		    'title': 'NAS File',
 		    'visible': true
 		 },
 		'NAS VMM': {
 		    'link': 'https://jisan93.myds.me/vmm',
-		    'icon': 'https://jisan93-link.github.io/link_jin/ico/vmm.ico',
+		    'icon': 'https://jisan93-link.github.io/link_jin/ico/vmm.png',
 		    'title': 'NAS VMM',
 		    'visible': true
                 }		    
@@ -291,7 +291,7 @@ async function getUserIP() {
                 tile.classList.remove('empty'); // 보이게 할 경우 empty 제거
                 // 표시될 때만 링크, 아이콘, 제목, alt 업데이트
                 linkElement.href = tileConfig.link;
-                imgElement.src = tileConfig.icon;
+                imgElement.src = tileConfig.pngn;
                 imgElement.alt = tileConfig.title; // alt를 title로 설정 (또는 별도 속성 추가 가능)
                 tile.setAttribute('data-title', tileConfig.title);
             } else {
@@ -340,59 +340,59 @@ setLinksAndTiles();
     <div class="row">
         <div class="tile" data-title="네이버">
             <a href="https://www.naver.com">
-                <img src="https://jisan93-link.github.io/link_jin/ico/naver.ico" alt="네이버">
+                <img src="https://jisan93-link.github.io/link_jin/ico/naver.png" alt="네이버">
             </a>
         </div>
         <div class="tile" data-title="다음">
             <a href="https://www.daum.net">
-                <img src="https://jisan93-link.github.io/link_jin/ico/daum.ico" alt="다음">
+                <img src="https://jisan93-link.github.io/link_jin/ico/daum.png" alt="다음">
             </a>
         </div>
         <div class="tile" data-title="구글">
             <a href="https://www.google.com">
-                <img src="https://jisan93-link.github.io/link_jin/ico/google.ico" alt="구글">
+                <img src="https://jisan93-link.github.io/link_jin/ico/google.png" alt="구글">
             </a>
         </div>
         <div class="tile" data-title="달력">
             <a href="https://search.naver.com/search.naver?where=nexearch&sm=top_sly.hst&fbm=0&acr=1&ie=utf8&query=%EB%8B%AC%EB%A0%A5">
-                <img src="https://jisan93-link.github.io/link_jin/ico/cal.ico" alt="달력">
+                <img src="https://jisan93-link.github.io/link_jin/ico/cal.png" alt="달력">
             </a>
         </div>
         <div class="tile" data-title="지도">
             <a id="tile" href="https://map.naver.com/">
-                <img src="https://jisan93-link.github.io/link_jin/ico/map.ico" alt="지도">
+                <img src="https://jisan93-link.github.io/link_jin/ico/map.png" alt="지도">
             </a>
         </div>
         <div class="tile" data-title="휴양림">
             <a href="https://www.foresttrip.go.kr/main.do?hmpgId=FRIP">
-                <img src="https://jisan93-link.github.io/link_jin/ico/cabin.ico" alt="휴양림">
+                <img src="https://jisan93-link.github.io/link_jin/ico/cabin.png" alt="휴양림">
             </a>
         </div>
         <div class="tile" data-title="네비게이션">
             <a href="https://www.fine-drive.com/defaults/index.do">
-                <img src="https://jisan93-link.github.io/link_jin/ico/fine.ico" alt="파인드라이브̺">
+                <img src="https://jisan93-link.github.io/link_jin/ico/fine.png" alt="파인드라이브̺">
             </a>
         </div>
         <div class="tile" data-title="유가">
             <a href="https://www.opinet.co.kr/searRgSelect.do">
-                <img src="https://jisan93-link.github.io/link_jin/ico/oil.ico" alt="유가">
+                <img src="https://jisan93-link.github.io/link_jin/ico/oil.png" alt="유가">
             </a>
         </div>
 	<div class="tile" data-title="KIRD">
 	<a href="https://alpha-campus.kr/">
-		<img src="https://jisan93-link.github.io/link_jin/ico/kird.ico" alt="KIRD">
+		<img src="https://jisan93-link.github.io/link_jin/ico/kird.png" alt="KIRD">
 	</a>
 	</div>  
 	
 	<div class="row">
   		<div class="tile" data-title="메일">
     			<a href="https://email.kfri.re.kr/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/mail.ico" alt="메일">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/mail.png" alt="메일">
     			</a>
 		</div>
   		  <div class="tile" data-title="일정">
       			  <a href="https://calendar.google.com/calendar/u/0/r/month?pli=1">
-      			      <img src="https://jisan93-link.github.io/link_jin/ico/gcal4.ico" alt="일정">
+      			      <img src="https://jisan93-link.github.io/link_jin/ico/gcal4.png" alt="일정">
     			        <div class="date">
              			   <script>
 			                const date2 = new Date().getDate(); // 직접 new Date() 사용
@@ -403,64 +403,64 @@ setLinksAndTiles();
     		</div>
 		<div class="tile" data-title="날씨">
     			<a id="weather-link" href="#">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/weather.ico" alt="날씨">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/weather.png" alt="날씨">
     		</a>
 		</div>  
 
 		<div class="tile" data-title="날씨영상">
     			<a id="weather2-link" href="#">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/weather2.ico" alt="날씨영상">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/weather2.png" alt="날씨영상">
     		</a>
 		</div>  
 		<div class="tile" data-title="WINDY">
     		<a href="https://www.windy.com/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/windy.ico" alt="윈디">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/windy.png" alt="윈디">
     		</a>
 		</div>
 		
 		<div class="tile" data-title="대기상태">
     		<a href="https://aqicn.org/city/korea/jeonbuk/hyeoksin-dong">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/aqi.ico" alt="대기상태">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/aqi.png" alt="대기상태">
     		</a>
 		</div>
 
 		<div class="tile" data-title="식품연">
     		<a href="https://www.kfri.re.kr/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/kfri.ico" alt="식품연" >
+        		<img src="https://jisan93-link.github.io/link_jin/ico/kfri.png" alt="식품연" >
     		</a>
 		</div>
 
 		<div class="tile" data-title="연구회">
     		<a href="https://www.nst.re.kr/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/nst2.ico" alt="연구회" >
+        		<img src="https://jisan93-link.github.io/link_jin/ico/nst2.png" alt="연구회" >
     		</a>
 		</div>
 		<div class="tile" data-title="과기부">
     		<a href="https://www.msit.go.kr/web/main/main.do">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/sci.ico" alt="과기부">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/sci.png" alt="과기부">
     		</a>
 		</div>
 	</div>
 	<div class="row">
 		<div class="tile" data-title="짱와레즈">
     		<a href="https://fun.jjang0u.com/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/jjang.ico" alt="짱와레즈">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/jjang.png" alt="짱와레즈">
     		</a>
 		</div>
 		<div class="tile" data-title="딴지일보">
     		<a href="https://www.ddanzi.com/hot_all">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/ddanzi.ico" alt="딴지일보">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/ddanzi.png" alt="딴지일보">
     		</a>
 		</div>	
 		<div class="tile" data-title="보배드림">
     		<a href="https://www.bobaedream.co.kr/list?code=best">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/bobae.ico" alt="보배드림">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/bobae.png" alt="보배드림">
     		</a>
 		</div>
 	
 		<div class="tile" data-title="유튜브">
     		<a href="https://www.youtube.com/?hl=ko&gl=KR&app=desktop">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/youtube.ico" alt="유튜브">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/youtube.png" alt="유튜브">
     		</a>
 		</div>
 		
@@ -469,24 +469,24 @@ setLinksAndTiles();
 
 		<div class="tile" data-title="우리은행">
     		<a href="https://www.wooribank.com/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/woori.ico" alt="우리은행">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/woori.png" alt="우리은행">
     		</a>
 		</div>
 
 		<div class="tile" data-title="하나카드">
     		<a href="https://www.hanacard.co.kr/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/hana.ico" alt="하나카드">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/hana.png" alt="하나카드">
     		</a>
 		</div>
 
 		<div class="tile" data-title="공제회">
     		<a href="https://www.sema.or.kr/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/dedu.ico" alt="공제회">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/dedu.png" alt="공제회">
     		</a>
 		</div>
 		<div class="tile" data-title="가계부">
     		<a id="account-link" href="#">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/Account.ico" alt="가계부">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/Account.png" alt="가계부">
     		</a>
 		</div>
 	</div>
@@ -494,52 +494,52 @@ setLinksAndTiles();
 	<div class="row" >
 		<div class="tile" data-title="에누리">
     		<a href="https://www.enuri.com/Index.jsp">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/enuri.ico" alt="에누리">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/enuri.png" alt="에누리">
     		</a>
 		</div>
 
 		<div class="tile" data-title="다나와">
     		<a href="https://www.danawa.com/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/danawa.ico" alt="다나와">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/danawa.png" alt="다나와">
     		</a>
 		</div>
 		<div class="tile" data-title="쿠팡">
     		<a href="https://www.coupang.com/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/coupang.ico" alt="쿠팡">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/coupang.png" alt="쿠팡">
     		</a>
 		</div>
 		<div class="tile" data-title="지마켓">
     		<a href="https://www.gmarket.co.kr/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/Gmarket.ico" alt="지마켓">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/Gmarket.png" alt="지마켓">
     		</a>
 		</div>
 		
 		<div class="tile" data-title="옥션">
     		<a href="https://www.auction.co.kr/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/auction.ico" alt="옥션">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/auction.png" alt="옥션">
     		</a>
 		</div>
 		
 		<div class="tile" data-title="11ST">
     		<a href="https://www.11st.co.kr/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/11st.ico" alt="11ST">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/11st.png" alt="11ST">
     		</a>
 		</div>
 		
 		<div class="tile" data-title="아이허브">
     		<a href="https://kr.iherb.com/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/iherb.ico" alt="아이허브">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/iherb.png" alt="아이허브">
     		</a>
 		</div>
 		<div class="tile" data-title="YES24">
     		<a href="https://www.yes24.com/Default.aspx">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/yes.ico" alt="YES24">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/yes.png" alt="YES24">
     		</a>
 		</div>
 		
 		<div class="tile" data-title="KT">
     		<a href="https://www.kt.com/">
-        		<img src="https://jisan93-link.github.io/link_jin/ico/kt.ico" alt="KT">
+        		<img src="https://jisan93-link.github.io/link_jin/ico/kt.png" alt="KT">
     		</a>
 		</div>
 	</div>
@@ -547,25 +547,25 @@ setLinksAndTiles();
     <div class="row">
         <div class="tile" data-title="NAS">
             <a id="nasman-link" href="">
-                <img src="https://jisan93-link.github.io/link_jin/ico/nas.ico" alt="nas">
+                <img src="https://jisan93-link.github.io/link_jin/ico/nas.png" alt="nas">
             </a>
         </div>
 
         <div class="tile" data-title="NAS Photo">
             <a id="nas-photo-link" href="">
-                <img src="https://jisan93-link.github.io/link_jin/ico/photo.ico" alt="photo">
+                <img src="https://jisan93-link.github.io/link_jin/ico/photo.png" alt="photo">
             </a>
         </div>
 
         <div class="tile" data-title="NAS Note">
             <a id="nas-note-link" href="">
-                <img src="https://jisan93-link.github.io/link_jin/ico/note.ico" alt="note">
+                <img src="https://jisan93-link.github.io/link_jin/ico/note.png" alt="note">
             </a>
         </div>
 
         <div class="tile" data-title="NAS Video">
             <a id="nasmov-link" href="">
-                <img src="https://jisan93-link.github.io/link_jin/ico/movie.ico" alt="video">
+                <img src="https://jisan93-link.github.io/link_jin/ico/movie.png" alt="video">
             </a>
         </div>
 
@@ -577,13 +577,13 @@ setLinksAndTiles();
 
         <div class="tile" data-title="NAS File">
             <a id="nas-file-link" href="">
-                <img src="https://jisan93-link.github.io/link_jin/ico/file.ico" alt="file">
+                <img src="https://jisan93-link.github.io/link_jin/ico/file.png" alt="file">
             </a>
         </div>
 
         <div class="tile" data-title="NAS VMM">
             <a id="nas-vmm-link" href="">
-                <img src="https://jisan93-link.github.io/link_jin/ico/vmm.ico" alt="vmm">
+                <img src="https://jisan93-link.github.io/link_jin/ico/vmm.png" alt="vmm">
             </a>
         </div>
 
