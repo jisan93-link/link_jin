@@ -117,57 +117,57 @@
         
     </style>
     <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const linksConfig = {
-        '220.87.147.62': {
-	    'weather-link': 'https://www.weather.go.kr/w/index.do#dong/5211367000/35.83507390600234/127.04950689405304/%EC%A0%84%EB%B6%81%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EC%99%84%EC%A3%BC%EA%B5%B0%20%EC%9D%B4%EC%84%9C%EB%A9%B4/SCH/%ED%95%9C%EA%B5%AD%EC%8B%9D%ED%92%88%EC%97%B0%EA%B5%AC%EC%9B%90',
-            'weather2-link': 'https://www.weather.go.kr/wgis-nuri/html/map.html?_1st=radar&_2nd=pop&center=127.04950689405305,35.83507390600202&zoom=7',
-            'account-link': 'https://jisan93-link.github.io/link_jin/',
-	    'tiles': {
-                'NAS': {
-                    'link': 'https://www.g2b.go.kr/', // NAS를 나라 링크로 변경
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/mar.png', // 나라 아이콘
-                    'title': '나라장터', // NAS를 나라로 표시
-		    'visible': true
-                },
-		 'NAS Photo': {
-                    'link': 'https://www.e-revenuestamp.or.kr/index.giro', 
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/duty.png', 
-                    'title': '인지세',
-		    'visible': true
-                },
-		 'NAS Note': {
-                    'link': 'https://www.c-market.net/', 
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/c-market.png',
-                    'title': '씨마켓', 
-		    'visible': true
-                },
-		 'NAS Video': {
-                    'link': 'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=%EC%B6%9C%EC%97%B0%EC%97%B0', 
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/news.png',
-                    'title': '출연연',
-		    'visible': true
-                },
-		 'NAS Music': {
-                    'link': 'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=%EC%8B%9D%ED%92%88%EC%97%B0', 
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/news.png',
-                    'title': '식품연',
-		    'visible': true
-                },
-		 'NAS File': {
-                    'link': 'https://www.hellodd.com/', 
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/dd.png',
-                    'title': '대덕넷', 
-		    'visible': true
-                },
-		'NAS VMM': {
-                    'link': 'https://www.extoll.co.kr/', 
-                    'icon': 'https://jisan93-link.github.io/link_jin/ico/ex.png',
-                    'title': '하이패스', 
-		    'visible': true
-                }		    
-            }
-        },
+	document.addEventListener('DOMContentLoaded', () => {
+    	const linksConfig = {
+            '220.87.147.62': {
+	        'weather-link': 'https://www.weather.go.kr/w/index.do#dong/5211367000/35.83507390600234/127.04950689405304/%EC%A0%84%EB%B6%81%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EC%99%84%EC%A3%BC%EA%B5%B0%20%EC%9D%B4%EC%84%9C%EB%A9%B4/SCH/%ED%95%9C%EA%B5%AD%EC%8B%9D%ED%92%88%EC%97%B0%EA%B5%AC%EC%9B%90',
+                'weather2-link': 'https://www.weather.go.kr/wgis-nuri/html/map.html?_1st=radar&_2nd=pop&center=127.04950689405305,35.83507390600202&zoom=7',
+                'account-link': 'https://jisan93-link.github.io/link_jin/',
+	        'tiles': {
+                    'NAS': {
+                        'link': 'https://www.g2b.go.kr/', // NAS를 나라 링크로 변경
+                        'icon': 'https://jisan93-link.github.io/link_jin/ico/mar.png', // 나라 아이콘
+                        'title': '나라장터', // NAS를 나라로 표시
+		        'visible': true
+                    },
+		     'NAS Photo': {
+	                    'link': 'https://www.e-revenuestamp.or.kr/index.giro', 
+	                    'icon': 'https://jisan93-link.github.io/link_jin/ico/duty.png', 
+	                    'title': '인지세',
+			    'visible': true
+	                },
+			 'NAS Note': {
+	                    'link': 'https://www.c-market.net/', 
+	                    'icon': 'https://jisan93-link.github.io/link_jin/ico/c-market.png',
+	                    'title': '씨마켓', 
+			    'visible': true
+	                },
+			 'NAS Video': {
+	                    'link': 'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=%EC%B6%9C%EC%97%B0%EC%97%B0', 
+	                    'icon': 'https://jisan93-link.github.io/link_jin/ico/news.png',
+	                    'title': '출연연',
+			    'visible': true
+	                },
+			 'NAS Music': {
+	                    'link': 'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=%EC%8B%9D%ED%92%88%EC%97%B0', 
+	                    'icon': 'https://jisan93-link.github.io/link_jin/ico/news.png',
+	                    'title': '식품연',
+			    'visible': true
+	                },
+			 'NAS File': {
+	                    'link': 'https://www.hellodd.com/', 
+	                    'icon': 'https://jisan93-link.github.io/link_jin/ico/dd.png',
+	                    'title': '대덕넷', 
+			    'visible': true
+	                },
+			'NAS VMM': {
+	                    'link': 'https://www.extoll.co.kr/', 
+	                    'icon': 'https://jisan93-link.github.io/link_jin/ico/ex.png',
+	                    'title': '하이패스', 
+			    'visible': true
+	                }		    
+	            }
+	        },
         'default': {
 	    'weather-link': 'https://www.weather.go.kr',
             'weather2-link': 'https://www.weather.go.kr/w/image/vshrt/rain.do',
@@ -258,57 +258,50 @@ async function getUserIP() {
 	}
 
     setLinks();
-	async function setLinksAndTiles() {
-        const userIP = await getUserIP();
-        const config = linksConfig[userIP] || linksConfig['default'];
+		
+async function setLinksAndTiles() {
+    const userIP = await getUserIP();
+    const config = linksConfig[userIP] || linksConfig['default'];
 
-        // 기본 링크 설정
-        Object.keys(config).forEach(id => {
-            if (id !== 'tiles') { // 'tiles' 키는 제외
-                const linkElement = document.getElementById(id);
-                if (linkElement) {
-                    linkElement.href = config[id];
-                } else {
-                    console.warn(`요소 ID '${id}'를 찾을 수 없습니다.`);
-                }
+    // 1. 기본 링크 설정 (weather-link, weather2-link, account-link 등)
+    Object.keys(config).forEach(key => {
+        if (key !== 'tiles') { // tiles 키는 별도로 처리
+            const linkElement = document.getElementById(key);
+            if (linkElement) {
+                linkElement.href = config[key];
+            } else {
+                console.warn(`요소 ID '${key}'를 찾을 수 없습니다.`);
             }
-        });
-   const placeholderImage = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAjSURBVHgB7cExAQAACAIwU89u7+8gdgA/v/8DAAAAAAAKAHgXAbkW9OupAAAAAElFTkSuQmCC';
-
-// 타일 내용 및 표시 여부 동적 수정
-const tiles = document.querySelectorAll('.tile');
-tiles.forEach(tile => {
-    const title = tile.getAttribute('data-title');
-    if (title && config.tiles.hasOwnProperty(title)) {
-        const tileConfig = config.tiles[title];
-        const linkElement = tile.querySelector('a');
-        const imgElement = tile.querySelector('img');
-
-        // 디버깅 로그 추가
-        console.log(`Processing tile: ${title}`, tileConfig);
-
-        // 표시 여부 설정: empty 클래스 추가/제거
-        if (tileConfig.visible) {
-            tile.classList.remove('empty'); // 보이게 할 경우 empty 제거
-            // 표시될 때만 링크, 아이콘, 제목, alt 업데이트
-            linkElement.href = tileConfig.link;
-            imgElement.src = tileConfig.icon; // pngn -> icon
-            imgElement.alt = tileConfig.title;
-            tile.setAttribute('data-title', tileConfig.title);
-            console.log(`Set ${title} img src to: ${tileConfig.icon}`);
-        } else {
-            tile.classList.add('empty'); // 숨길 경우 empty 추가
-            // 숨길 때 링크, 아이콘, 제목, alt 비우기
-            linkElement.href = '';
-            imgElement.src = placeholderImage || ''; // placeholderImage 확인
-            imgElement.alt = '';
-            tile.setAttribute('data-title', '');
-            console.log(`Hid ${title} tile`);
         }
-    } else {
-        console.error(`Tile config not found for title: ${title}`);
-    }
-});
+    });
+
+    // 2. 타일 링크와 이미지 설정
+    const tiles = config.tiles || {};
+    Object.keys(tiles).forEach(tileKey => {
+        const tile = tiles[tileKey];
+        if (tile.visible) {
+            // 타일의 링크 요소 ID는 소문자와 하이픈으로 변환 (예: 'NAS VMM' -> 'nas-vmm-link')
+            const linkId = tileKey.toLowerCase().replace(/\s+/g, '-') + '-link';
+            const linkElement = document.getElementById(linkId);
+
+            if (linkElement) {
+                // 링크 설정
+                linkElement.href = tile.link;
+
+                // 이미지 설정
+                const imgElement = linkElement.querySelector('img');
+                if (imgElement) {
+                    imgElement.src = tile.icon;
+                    imgElement.alt = tile.title;
+                } else {
+                    console.warn(`타일 '${tileKey}'의 이미지 요소를 찾을 수 없습니다.`);
+                }
+            } else {
+                console.warn(`타일 링크 ID '${linkId}'를 찾을 수 없습니다.`);
+            }
+        }
+    });
+}
 
 setLinksAndTiles();
 		
