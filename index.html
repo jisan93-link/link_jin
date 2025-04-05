@@ -259,49 +259,57 @@ async function getUserIP() {
 
     setLinks();
 		
-async function setLinksAndTiles() {
-    const userIP = await getUserIP();
-    const config = linksConfig[userIP] || linksConfig['default'];
-
-    // 1. 기본 링크 설정 (weather-link, weather2-link, account-link 등)
-    Object.keys(config).forEach(key => {
-        if (key !== 'tiles') { // tiles 키는 별도로 처리
-            const linkElement = document.getElementById(key);
-            if (linkElement) {
-                linkElement.href = config[key];
-            } else {
-                console.warn(`요소 ID '${key}'를 찾을 수 없습니다.`);
-            }
-        }
-    });
-
-    // 2. 타일 링크와 이미지 설정
-    const tiles = config.tiles || {};
-    Object.keys(tiles).forEach(tileKey => {
-        const tile = tiles[tileKey];
-        if (tile.visible) {
-            // 타일의 링크 요소 ID는 소문자와 하이픈으로 변환 (예: 'NAS VMM' -> 'nas-vmm-link')
-            const linkId = tileKey.toLowerCase().replace(/\s+/g, '-') + '-link';
-            const linkElement = document.getElementById(linkId);
-
-            if (linkElement) {
-                // 링크 설정
-                linkElement.href = tile.link;
-
-                // 이미지 설정
-                const imgElement = linkElement.querySelector('img');
-                if (imgElement) {
-                    imgElement.src = tile.icon;
-                    imgElement.alt = tile.title;
-                } else {
-                    console.warn(`타일 '${tileKey}'의 이미지 요소를 찾을 수 없습니다.`);
-                }
-            } else {
-                console.warn(`타일 링크 ID '${linkId}'를 찾을 수 없습니다.`);
-            }
-        }
-    });
-}
+	async function setLinksAndTiles() {
+	    const userIP = await getUserIP();
+	    const config = linksConfig[userIP] || linksConfig['default'];
+	
+	    // 1. 기본 링크 설정 (weather-link, weather2-link, account-link 등)
+	    Object.keys(config).forEach(key => {
+	        if (key !== 'tiles') { // tiles 키는 별도로 처리
+	            const linkElement = document.getElementById(key);
+	            if (linkElement) {
+	                linkElement.href = config[key];
+	            } else {
+	                console.warn(`요소 ID '${key}'를 찾을 수 없습니다.`);
+	            }
+	        }
+	    });
+	
+	    // 2. 타일 링크와 이미지 설정
+	    const tiles = config.tiles || {};
+	    Object.keys(tiles).forEach(tileKey => {
+	        const tile = tiles[tileKey];
+	        if (tile.visible) {
+	            // 타일 키에 따라 링크 ID를 결정
+	            let linkId;
+	            if (tileKey === 'NAS') {
+	                linkId = 'nasman-link'; // HTML에서 NAS 타일의 ID
+	            } else if (tileKey === 'NAS Video') {
+	                linkId = 'nasmov-link'; // HTML에서 NAS Video 타일의 ID
+	            } else {
+	                // 기본 규칙: 타일 키를 소문자로 변환하고 공백을 하이픈으로 변경
+	                linkId = tileKey.toLowerCase().replace(/\s+/g, '-') + '-link';
+	            }
+	
+	            const linkElement = document.getElementById(linkId);
+	            if (linkElement) {
+	                // 링크 설정
+	                linkElement.href = tile.link;
+	
+	                // 이미지 설정
+	                const imgElement = linkElement.querySelector('img');
+	                if (imgElement) {
+	                    imgElement.src = tile.icon;
+	                    imgElement.alt = tile.title;
+	                } else {
+	                    console.warn(`타일 '${tileKey}'의 이미지 요소를 찾을 수 없습니다.`);
+	                }
+	            } else {
+	                console.warn(`타일 링크 ID '${linkId}'를 찾을 수 없습니다.`);
+	            }
+	        }
+	    });
+	}
 
 setLinksAndTiles();
 		
