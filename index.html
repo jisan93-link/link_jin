@@ -169,7 +169,7 @@
 		        const config = linksConfig[userIP] || linksConfig['default'];
 		        console.log('선택된 config:', config);
 		
-		        // 1. 기본 링크 설정
+		        // 기본 링크 설정
 		        const linkIds = ['weather-link', 'weather2-link', 'account-link'];
 		        linkIds.forEach(id => {
 		            const linkElement = document.getElementById(id);
@@ -181,7 +181,7 @@
 		            }
 		        });
 		
-		        // 2. 타일 링크와 이미지 설정
+		        // 타일 링크와 이미지 설정
 		        const tiles = config.tiles || {};
 		        Object.keys(tiles).forEach(tileKey => {
 		            const tile = tiles[tileKey];
@@ -197,17 +197,21 @@
 		                    const imgElement = linkElement.querySelector('img');
 		                    if (imgElement) {
 		                        imgElement.src = tile.icon;
-		                        imgElement.alt = tile.title;
-		                        console.log(`${tileKey} - src: ${tile.icon}, alt: ${tile.title}`);
+		                        imgElement.alt = tile.title; // alt를 title로 설정
+		                        // DOM 반영 확인
+		                        console.log(`${tileKey} - src: ${tile.icon}, alt 설정값: ${tile.title}, 실제 DOM alt: ${imgElement.getAttribute('alt')}`);
+		                    } else {
+		                        console.warn(`타일 '${tileKey}'에 이미지 요소가 없습니다. HTML 확인 필요!`);
 		                    }
 		                } else {
 		                    console.warn(`타일 링크 ID '${linkId}'를 찾을 수 없습니다.`);
 		                }
 		            }
 		        });
-		    }		
+		    }
+		
 		    // 함수 실행
-		    setLinksAndTiles();
+		    setLinksAndTiles().catch(error => console.error('setLinksAndTiles 실행 중 오류:', error));
 
     // 배경 이미지 설정
     const images = [
@@ -477,32 +481,31 @@
         </div>
 
         <div class="tile" data-title="NAS Note">
-            <a id="nas-note-link" href="">
-                <img src="https://jisan93-link.github.io/link_jin/ico/note.png" alt="note">
+            <a id="nas-note-link" href="#">
+                <img src="" alt="">
             </a>
         </div>
 
         <div class="tile" data-title="NAS Video">
-            <a id="nasmov-link" href="">
-                <img src="https://jisan93-link.github.io/link_jin/ico/movie.png" alt="video">
+            <a id="nasmov-link" href="#">
             </a>
         </div>
 
         <div class="tile" data-title="NAS Music">
-            <a id="nas-music-link" href="">
-                <img src="https://jisan93-link.github.io/link_jin/ico/Music.png" alt="music">
+            <a id="nas-music-link" href="#">
+                <img src="" alt="">
             </a>
         </div>
 
         <div class="tile" data-title="NAS File">
-            <a id="nas-file-link" href="">
-                <img src="https://jisan93-link.github.io/link_jin/ico/file.png" alt="file">
+            <a id="nas-file-link" href="#">
+                <img src="" alt="">
             </a>
         </div>
 
         <div class="tile" data-title="NAS VMM">
-            <a id="nas-vmm-link" href="">
-                <img src="https://jisan93-link.github.io/link_jin/ico/vmm.png" alt="vmm">
+            <a id="nas-vmm-link" href="#">
+                <img src="" alt="">
             </a>
         </div>
 
