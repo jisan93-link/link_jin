@@ -120,8 +120,6 @@
 	    document.addEventListener('DOMContentLoaded', () => {
 		    const linksConfig = {
 			'211.57.34.231': {
-			    'weather-link': 'https://www.weather.go.kr/w/index.do#dong/5211367000/35.83507390600234/127.04950689405304/%EC%A0%84%EB%B6%81%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EC%99%84%EC%A3%BC%EA%B5%B0%20%EC%9D%B4%EC%84%9C%EB%A9%B4/SCH/%ED%95%9C%EA%B5%AD%EC%8B%9D%ED%92%88%EC%97%B0%EA%B5%AC%EC%9B%90',
-			    'weather2-link': 'https://www.weather.go.kr/wgis-nuri/html/map.html?_1st=radar&_2nd=pop¢er=127.04950689405305,35.83507390600202&zoom=7',
 			    'account-link': 'https://jisan93-link.github.io/link_jin/',
 			    'tiles': {
 				'NAS': { 'link': 'https://www.g2b.go.kr/', 'icon': 'https://jisan93-link.github.io/link_jin/ico/mar.png', 'title': '나라장터', 'visible': true },
@@ -134,8 +132,6 @@
 			    }
 			},
 			'default': {
-			    'weather-link': 'https://www.weather.go.kr',
-			    'weather2-link': 'https://www.weather.go.kr/w/image/vshrt/rain.do',
 			    'account-link': 'https://docs.google.com/spreadsheets/d/1BQP86KYvWIzgw8xLp365bHlCb8C0uhIxnl32dGPawdw/edit#gid=1889116597',
 			    'tiles': {
 				'NAS': { 'link': 'https://dsm.jisan93.myds.me', 'icon': 'https://jisan93-link.github.io/link_jin/ico/nas.png', 'title': 'NAS', 'visible': true },
@@ -155,7 +151,7 @@
 		            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 		            const data = await response.json();
 		            console.log('사용자 IP:', data.ip);
-		            return '1.1.1.8'; // 테스트용으로 강제 설정
+		            return '211.57.34.231'; // 테스트용으로 강제 설정
 		            // return data.ip;
 		        } catch (error) {
 		            console.error('IP 가져오기 실패:', error);
@@ -324,13 +320,13 @@
         		</a>
     		</div>
 		<div class="tile" data-title="날씨">
-    			<a id="weather-link" href="#">
+    			<a href="https://www.weather.go.kr">
         		<img src="https://jisan93-link.github.io/link_jin/ico/weather.png" alt="날씨">
     		</a>
 		</div>  
 
 		<div class="tile" data-title="날씨영상">
-    			<a id="weather2-link" href="#">
+    			<a href="https://www.weather.go.kr/w/image/vshrt/rain.do">
         		<img src="https://jisan93-link.github.io/link_jin/ico/weather2.png" alt="날씨영상">
     		</a>
 		</div>  
