@@ -149,69 +149,63 @@
 			}
 		    };
 		
-		    async function getUserIP() {
-			try {
-			    const response = await fetch('https://api.ipify.org?format=json', { timeout: 5000 });
-			    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-			    const data = await response.json();
-			    if (!data.ip) throw new Error('IP 주소를 찾을 수 없습니다.');
-			    console.log('사용자 IP:', data.ip);
-			    return data.ip;
-			    // 테스트용: 강제로 1.1.1.8 반환
-			    // return '1.1.1.8';
-			} catch (error) {
-			    console.error('IP 가져오기 실패:', error);
-			    return 'default';
-			}
+		async function getUserIP() {
+		        try {
+		            const response = await fetch('https://api.ipify.org?format=json', { timeout: 5000 });
+		            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+		            const data = await response.json();
+		            console.log('사용자 IP:', data.ip);
+		            return data.ip;
+		            // 테스트용: return '1.1.1.8';
+		        } catch (error) {
+		            console.error('IP 가져오기 실패:', error);
+		            return 'default';
+		        }
 		    }
 		
 		    async function setLinksAndTiles() {
-			const userIP = await getUserIP();
-			console.log('확인된 IP:', userIP); // IP가 제대로 나오는지 확인
-			const config = linksConfig[userIP] || linksConfig['default'];
-			console.log('선택된 config:', config); // 선택된 설정 확인
+		        const userIP = await getUserIP();
+		        console.log('확인된 IP:', userIP);
+		        const config = linksConfig[userIP] || linksConfig['default'];
+		        console.log('선택된 config:', config);
 		
-			// 1. 기본 링크 설정
-			Object.keys(config).forEach(key => {
-			    if (key !== 'tiles') {
-				const linkElement = document.getElementById(key);
-				if (linkElement) {
-				    linkElement.href = config[key];
-				    console.log(`${key} 링크 설정: ${config[key]}`);
-				} else {
-				    console.warn(`요소 ID '${key}'를 찾을 수 없습니다.`);
-				}
-			    }
-			});
+		        // 1. 기본 링크 설정
+		        const linkIds = ['weather-link', 'weather2-link', 'account-link'];
+		        linkIds.forEach(id => {
+		            const linkElement = document.getElementById(id);
+		            if (linkElement) {
+		                linkElement.href = config[id];
+		                console.log(`${id} 설정 완료: ${linkElement.href}`);
+		            } else {
+		                console.error(`HTML에서 ID '${id}'를 찾을 수 없습니다.`);
+		            }
+		        });
 		
-			// 2. 타일 링크와 이미지 설정
-			const tiles = config.tiles || {};
-			Object.keys(tiles).forEach(tileKey => {
-			    const tile = tiles[tileKey];
-			    if (tile.visible) {
-				let linkId = tileKey === 'NAS' ? 'nasman-link' :
-					    tileKey === 'NAS Video' ? 'nasmov-link' :
-					    tileKey.toLowerCase().replace(/\s+/g, '-') + '-link';
+		        // 2. 타일 링크와 이미지 설정
+		        const tiles = config.tiles || {};
+		        Object.keys(tiles).forEach(tileKey => {
+		            const tile = tiles[tileKey];
+		            if (tile.visible) {
+		                let linkId = tileKey === 'NAS' ? 'nasman-link' :
+		                            tileKey === 'NAS Video' ? 'nasmov-link' :
+		                            tileKey.toLowerCase().replace(/\s+/g, '-') + '-link';
 		
-				const linkElement = document.getElementById(linkId);
-				if (linkElement) {
-				    linkElement.href = tile.link;
-				    console.log(`${tileKey} 링크 설정: ${tile.link}`);
-				    const imgElement = linkElement.querySelector('img');
-				    if (imgElement) {
-					imgElement.src = tile.icon;
-					imgElement.alt = tile.title;
-					console.log(`${tileKey} - src: ${tile.icon}, alt: ${tile.title}`);
-				    } else {
-					console.warn(`타일 '${tileKey}'의 이미지 요소를 찾을 수 없습니다.`);
-				    }
-				} else {
-				    console.warn(`타일 링크 ID '${linkId}'를 찾을 수 없습니다.`);
-				}
-			    }
-			});
-		    }
-		
+		                const linkElement = document.getElementById(linkId);
+		                if (linkElement) {
+		                    linkElement.href = tile.link;
+		                    console.log(`${tileKey} 링크 설정: ${tile.link}`);
+		                    const imgElement = linkElement.querySelector('img');
+		                    if (imgElement) {
+		                        imgElement.src = tile.icon;
+		                        imgElement.alt = tile.title;
+		                        console.log(`${tileKey} - src: ${tile.icon}, alt: ${tile.title}`);
+		                    }
+		                } else {
+		                    console.warn(`타일 링크 ID '${linkId}'를 찾을 수 없습니다.`);
+		                }
+		            }
+		        });
+		    }		
 		    // 함수 실행
 		    setLinksAndTiles();
 });
