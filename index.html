@@ -162,14 +162,14 @@
 			        }
 			    }
 		
-		    async function setLinksAndTiles() {
+		async function setLinksAndTiles() {
 		        const userIP = await getUserIP();
 		        console.log('확인된 IP:', userIP);
 		        const config = linksConfig[userIP] || linksConfig['default'];
 		        console.log('선택된 config:', config);
 		
 		        // 기본 링크 설정
-		        const linkIds = ['account-link'];
+		        const linkIds = ['weather-link', 'weather2-link', 'account-link'];
 		        linkIds.forEach(id => {
 		            const linkElement = document.getElementById(id);
 		            if (linkElement) {
@@ -194,20 +194,21 @@
 		                    linkElement.href = tile.link;
 		                    console.log(`${tileKey} 링크 설정: ${tile.link}`);
 		                    const imgElement = linkElement.querySelector('img');
-		                    if (imgElement) {
+		                    const tileDiv = linkElement.closest('.tile'); // 부모 .tile 요소 찾기
+		                    if (imgElement && tileDiv) {
 		                        imgElement.src = tile.icon;
-		                        imgElement.setAttribute('alt', tile.title); // setAttribute로 강제 설정
-		                        console.log(`${tileKey} - src: ${tile.icon}, alt 설정값: ${tile.title}, 실제 DOM alt: ${imgElement.getAttribute('alt')}`);
+		                        imgElement.setAttribute('alt', tile.title); // img alt 설정
+		                        tileDiv.setAttribute('data-title', tile.title); // data-title도 업데이트
+		                        console.log(`${tileKey} - src: ${tile.icon}, alt: ${tile.title}, data-title: ${tileDiv.getAttribute('data-title')}`);
 		                    } else {
-		                        console.warn(`타일 '${tileKey}'에 이미지 요소가 없습니다.`);
+		                        console.warn(`타일 '${tileKey}'에 이미지 또는 .tile 요소가 없습니다.`);
 		                    }
 		                } else {
 		                    console.warn(`타일 링크 ID '${linkId}'를 찾을 수 없습니다.`);
 		                }
 		            }
 		        });
-		    }
-		
+		    }		
 		    // 함수 실행
 		    setLinksAndTiles();
 
